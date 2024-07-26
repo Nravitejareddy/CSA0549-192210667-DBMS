@@ -1,5 +1,3 @@
-experiment 1
-
 CREATE DATABASE CompanyDB;
 
 USE CompanyDB;
