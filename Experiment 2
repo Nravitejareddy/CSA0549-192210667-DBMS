@@ -1,0 +1,33 @@
+CREATE DATABASE BankDB;
+
+USE BankDB;
+
+CREATE TABLE Bank (
+    S_No INT AUTO_INCREMENT PRIMARY KEY,
+    Cust_Name VARCHAR(100),
+    Acc_No VARCHAR(20),
+    Balance DECIMAL(15, 2),
+    Cus_Branch VARCHAR(100)
+);
+
+INSERT INTO Bank (Cust_Name, Acc_No, Balance, Cus_Branch) VALUES
+    ('John Doe', 'AC1234567890', 1500.00, 'New York'),
+    ('Jane Smith', 'AC0987654321', 2500.00, 'Los Angeles'),
+    ('Alice Johnson', 'AC1122334455', 3000.00, 'Chicago'),
+    ('Bob Brown', 'AC5566778899', 1200.00, 'Houston'),
+    ('Carol White', 'AC6677889900', 1800.00, 'San Francisco');
+
+SELECT * FROM Bank;
+
+UPDATE Bank
+SET Cus_Branch = 'Pondicherry'
+WHERE S_No = 2;
+
+SELECT * FROM Bank
+WHERE Balance > 1500.00;
+
+SELECT * FROM Bank
+ORDER BY Balance DESC;
+
+SELECT * FROM Bank
+LIMIT 3;
