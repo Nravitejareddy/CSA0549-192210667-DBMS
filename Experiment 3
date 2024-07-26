@@ -1,0 +1,31 @@
+USE CompanyDB;
+
+CREATE TABLE IF NOT EXISTS Employee (
+    S_No INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Designation VARCHAR(100),
+    Branch VARCHAR(100),
+    UNIQUE (Name, Designation),
+    CHECK (CHAR_LENGTH(Name) > 0)
+);
+
+CREATE TABLE IF NOT EXISTS Workers (
+    S_No INT,
+    Name VARCHAR(100),
+    Designation VARCHAR(100),
+    Branch VARCHAR(100),
+    FOREIGN KEY (S_No) REFERENCES Employee(S_No) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT IGNORE INTO Employee (S_No, Name, Designation, Branch) VALUES
+    (1, 'John Doe', 'Manager', 'New York'),
+    (2, 'Jane Smith', 'Software Engineer', 'San Francisco'),
+    (3, 'Alice Johnson', 'Data Analyst', 'Chicago');
+
+INSERT IGNORE INTO Workers (S_No, Name, Designation, Branch) VALUES
+    (1, 'John Doe', 'Manager', 'New York'),
+    (2, 'Jane Smith', 'Software Engineer', 'San Francisco'),
+    (3, 'Alice Johnson', 'Data Analyst', 'Chicago');
+
+SELECT * FROM Employee;
+SELECT * FROM Workers;
