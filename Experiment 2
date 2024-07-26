@@ -1,0 +1,91 @@
+mysql> USE BankDB;
+Database changed
+mysql>
+mysql> CREATE TABLE Bank (
+    ->     S_No INT AUTO_INCREMENT PRIMARY KEY,
+    ->     Cust_Name VARCHAR(100),
+    ->     Acc_No VARCHAR(20),
+    ->     Balance DECIMAL(15, 2),
+    ->     Cus_Branch VARCHAR(100)
+    -> );
+ERROR 1050 (42S01): Table 'bank' already exists
+mysql>
+mysql> INSERT INTO Bank (Cust_Name, Acc_No, Balance, Cus_Branch) VALUES
+    ->     ('John Doe', 'AC1234567890', 1500.00, 'New York'),
+    ->     ('Jane Smith', 'AC0987654321', 2500.00, 'Los Angeles'),
+    ->     ('Alice Johnson', 'AC1122334455', 3000.00, 'Chicago'),
+    ->     ('Bob Brown', 'AC5566778899', 1200.00, 'Houston'),
+    ->     ('Carol White', 'AC6677889900', 1800.00, 'San Francisco');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> SELECT * FROM Bank;
++------+---------------+--------------+---------+---------------+
+| S_No | Cust_Name     | Acc_No       | Balance | Cus_Branch    |
++------+---------------+--------------+---------+---------------+
+|    1 | John Doe      | AC1234567890 | 1500.00 | New York      |
+|    2 | Jane Smith    | AC0987654321 | 2500.00 | Pondicherry   |
+|    3 | Alice Johnson | AC1122334455 | 3000.00 | Chicago       |
+|    4 | Bob Brown     | AC5566778899 | 1200.00 | Houston       |
+|    5 | Carol White   | AC6677889900 | 1800.00 | San Francisco |
+|    6 | John Doe      | AC1234567890 | 1500.00 | New York      |
+|    7 | Jane Smith    | AC0987654321 | 2500.00 | Los Angeles   |
+|    8 | Alice Johnson | AC1122334455 | 3000.00 | Chicago       |
+|    9 | Bob Brown     | AC5566778899 | 1200.00 | Houston       |
+|   10 | Carol White   | AC6677889900 | 1800.00 | San Francisco |
++------+---------------+--------------+---------+---------------+
+10 rows in set (0.00 sec)
+
+mysql>
+mysql> UPDATE Bank
+    -> SET Cus_Branch = 'Pondicherry'
+    -> WHERE S_No = 2;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>
+mysql> SELECT * FROM Bank
+    -> WHERE Balance > 1500.00;
++------+---------------+--------------+---------+---------------+
+| S_No | Cust_Name     | Acc_No       | Balance | Cus_Branch    |
++------+---------------+--------------+---------+---------------+
+|    2 | Jane Smith    | AC0987654321 | 2500.00 | Pondicherry   |
+|    3 | Alice Johnson | AC1122334455 | 3000.00 | Chicago       |
+|    5 | Carol White   | AC6677889900 | 1800.00 | San Francisco |
+|    7 | Jane Smith    | AC0987654321 | 2500.00 | Los Angeles   |
+|    8 | Alice Johnson | AC1122334455 | 3000.00 | Chicago       |
+|   10 | Carol White   | AC6677889900 | 1800.00 | San Francisco |
++------+---------------+--------------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> SELECT * FROM Bank
+    -> ORDER BY Balance DESC;
++------+---------------+--------------+---------+---------------+
+| S_No | Cust_Name     | Acc_No       | Balance | Cus_Branch    |
++------+---------------+--------------+---------+---------------+
+|    3 | Alice Johnson | AC1122334455 | 3000.00 | Chicago       |
+|    8 | Alice Johnson | AC1122334455 | 3000.00 | Chicago       |
+|    2 | Jane Smith    | AC0987654321 | 2500.00 | Pondicherry   |
+|    7 | Jane Smith    | AC0987654321 | 2500.00 | Los Angeles   |
+|    5 | Carol White   | AC6677889900 | 1800.00 | San Francisco |
+|   10 | Carol White   | AC6677889900 | 1800.00 | San Francisco |
+|    1 | John Doe      | AC1234567890 | 1500.00 | New York      |
+|    6 | John Doe      | AC1234567890 | 1500.00 | New York      |
+|    4 | Bob Brown     | AC5566778899 | 1200.00 | Houston       |
+|    9 | Bob Brown     | AC5566778899 | 1200.00 | Houston       |
++------+---------------+--------------+---------+---------------+
+10 rows in set (0.00 sec)
+
+mysql>
+mysql> SELECT * FROM Bank
+    -> LIMIT 3;
++------+---------------+--------------+---------+-------------+
+| S_No | Cust_Name     | Acc_No       | Balance | Cus_Branch  |
++------+---------------+--------------+---------+-------------+
+|    1 | John Doe      | AC1234567890 | 1500.00 | New York    |
+|    2 | Jane Smith    | AC0987654321 | 2500.00 | Pondicherry |
+|    3 | Alice Johnson | AC1122334455 | 3000.00 | Chicago     |
++------+---------------+--------------+---------+-------------+
+3 rows in set (0.00 sec)
